@@ -92,11 +92,11 @@ const loginUser = async (req, res) => {
   
       // Return the user details without password and refreshToken fields
       const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
-  
+     
       return res
         .status(200)
-        .cookie("accessToken", accessToken, { httpOnly: true,  })
-        .cookie("refreshToken", refreshToken, { httpOnly: true,  })
+        .cookie("accessToken", accessToken, { httpOnly: true,sameSite: 'None' , secure: true })
+        .cookie("refreshToken", refreshToken, { httpOnly: true, sameSite: 'None' ,secure: true })
         .json({
           message: "User logged in successfully",
           user: loggedInUser,
@@ -129,5 +129,21 @@ const loginUser = async (req, res) => {
   };
   
 
+  const currentUser = async(req, res)=>{
+    
+   try {
+         
+     const user = await User.findById(req.user._id)
 
-export { registerUser, loginUser, logoutUser };
+     return res
+     .status(200)
+     .json({
+       user
+     })
+   } catch (error) {
+      return res.status(500).json({ message: "Something went wrong", error: error.message });
+   }
+  }
+
+
+export { registerUser, loginUser, logoutUser,currentUser };

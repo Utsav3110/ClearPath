@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 import axios from 'axios';
 
 const Register = () => {
@@ -44,7 +45,7 @@ const Register = () => {
       console.log('User registered successfully:', response.data);
       // Redirect or clear form after successful registration
     } catch (error) {
-      setServerError(error.response?.data || 'An error occurred while registering');
+      setServerError(error.response?.data?.message || 'An error occurred while registering');
     } finally {
       setLoading(false);
     }
@@ -105,7 +106,7 @@ const Register = () => {
 
           {/* Error Message */}
           {error && <p className="text-red-500 mb-4">{error}</p>}
-          {serverError && <p className="text-red-500 mb-4">{serverError}</p>}
+          {typeof serverError === 'string' && <p className="text-red-500 mb-4">{serverError}</p>}
 
           {/* Submit Button */}
           <button
@@ -116,6 +117,16 @@ const Register = () => {
             {loading ? 'Registering...' : 'Register'}
           </button>
         </form>
+
+        {/* Redirect to Login */}
+        <div className="mt-4 text-center">
+          <p className="text-gray-600 dark:text-gray-400">
+            Already have an account?{' '}
+            <Link to="/login" className="text-blue-500 hover:underline">
+              Login
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +11,8 @@ const Login = () => {
   const [error, setError] = useState('');
   const [serverError, setServerError] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
 
   // Handle input change
   const handleChange = (e) => {
@@ -48,10 +52,14 @@ const Login = () => {
       }
     );
       console.log('User logged in successfully:', response.data);
+      window.location.reload();
+      navigate('/home');
       // Handle successful login, redirect, or store token
     } catch (error) {
-      setServerError(error.response?.data || 'An error occurred during login');
-    } finally {
+      const errorMessage = error.response?.data?.message || 'An error occurred during login';
+      setServerError(errorMessage);  // Ensure it's a string message
+    }
+    finally {
       setLoading(false);
     }
   };

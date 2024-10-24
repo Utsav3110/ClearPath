@@ -6,16 +6,20 @@ import cookieParser from "cookie-parser";
 
 
 const app = express();
+dotenv.config();
+
+
 app.use(cors({
-    origin : process.env.CORS_ORIGIN,
-    credentials : true
+    origin: process.env.CORS_ORIGIN || "http://localhost:5173", // Update with your frontend URL
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }))
 
 
 app.use(express.json());
 app.use(cookieParser())
 
-dotenv.config();
 
 connectDB()
 .then(()=>{
