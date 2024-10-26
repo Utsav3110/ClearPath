@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import HomePage from './components/HomePage';
 import axios from 'axios';
 import Register from './components/Register';
+import ReportForm from './components/ReportFrom';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,17 +29,18 @@ const App = () => {
   return (
     <Router>
       <Routes>
-      <Route
-          path="/"
-          element={<Register/>}
-         />
+        <Route path="/" element={<Register />} />
         <Route
           path="/login"
           element={isAuthenticated ? <Navigate to="/home" /> : <Login setIsAuthenticated={setIsAuthenticated} />}
-         />
+        />
         <Route
           path="/home"
           element={isAuthenticated ? <HomePage setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/report"
+          element={isAuthenticated ? <ReportForm /> : <Navigate to="/login" />} // Protect the /report route
         />
       </Routes>
     </Router>

@@ -145,5 +145,24 @@ const loginUser = async (req, res) => {
    }
   }
 
+  const getUser = async (req, res) => {
+    try {
+      const userID = req.body._id; // Assuming you're sending _id in the request body
+      if (!userID) {
+        return res.status(400).json({ message: "Please provide a valid ID" });
+      }
+  
+      const user = await User.findById(userID); // Await the result
+  
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      return res.status(200).json({ user }); // Return user data
+    } catch (error) {
+      return res.status(500).json({ message: "Something went wrong", error: error.message });
+    }
+  };
+  
 
-export { registerUser, loginUser, logoutUser,currentUser };
+export { registerUser, loginUser, logoutUser,currentUser,getUser };

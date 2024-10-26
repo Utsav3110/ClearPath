@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 const Register = () => {
   const [formData, setFormData] = useState({
     username: '',
@@ -32,6 +32,7 @@ const Register = () => {
     return true;
   };
 
+  const navigate = useNavigate();
   // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,10 +40,10 @@ const Register = () => {
 
     setLoading(true);
     setServerError('');
-
     try {
       const response = await axios.post('http://localhost:3000/api/v1/users/register', formData);
       console.log('User registered successfully:', response.data);
+      navigate("/login"); 
       // Redirect or clear form after successful registration
     } catch (error) {
       setServerError(error.response?.data?.message || 'An error occurred while registering');

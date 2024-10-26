@@ -1,6 +1,7 @@
 import { Router } from "express";
-import { loginUser, logoutUser, registerUser ,currentUser} from "../controller/user.controller.js";
+import { loginUser, logoutUser, registerUser ,currentUser, getUser} from "../controller/user.controller.js";
 import { verifyJWT } from "../middleware/auth.middleware.js";
+import { allReports, createReport } from "../controller/report.controller.js";
 
 const route = Router();
 
@@ -21,6 +22,19 @@ route.route("/logout").post(
 route.route("/current-user").get(
     verifyJWT,
     currentUser
+)
+
+route.route("/report").post(
+    verifyJWT,
+    createReport
+)
+
+route.route("/getUser").post(
+    getUser
+)
+
+route.route("/all-Report").get(
+    allReports
 )
 
 

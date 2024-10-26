@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const Login = () => {
@@ -106,6 +107,16 @@ const Login = () => {
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
+
+        {/* Redirect to Register */}
+        <div className="mt-4 text-center">
+          <p className="text-gray-600 dark:text-gray-400">
+            Don't have an account?{' '}
+            <Link to="/" className="text-blue-500 hover:underline">
+              Register
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
