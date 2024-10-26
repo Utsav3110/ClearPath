@@ -1,5 +1,9 @@
 # ClearPath
 
+## Working video
+
+  https://youtu.be/l_tH-fnlKZk
+
 ## Overview
 
 ClearPath is a web-based platform that allows users to report locations where police are checking for speeding or conducting regular check-ups. The application provides users with an interactive map to view reports and contributes to community awareness.
@@ -82,3 +86,9 @@ npm install
 # Start the client application
 npm run dev
 ```
+
+
+## Disclaimer
+
+ClearPath is a project developed solely for educational purposes. This platform is intended to demonstrate technical skills and concepts related to web development. Users are reminded to always follow all traffic laws and regulations. ClearPath does not encourage or endorse any behavior that would infringe upon local traffic rules or public safety guidelines. The developers of this project are not responsible for any misuse of the information or features provided.
+
